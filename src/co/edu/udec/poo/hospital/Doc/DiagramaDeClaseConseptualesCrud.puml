@@ -1,0 +1,91 @@
+@startuml
+
+' === CLASES ENTIDAD ===
+
+class Medico {
+-nombre: String
+-direccion: String
+-telefono: String
+-poblacion: String
+-provincia: String
+-codigoPostal: String
+-NIF: String
+-numSeguSocial: String
+-categoria: String
+
+}
+
+class Paciente {
+-nombre: String
+-direccion: String
+-telefono: String
+-codigoPostal: String
+-NIF: String
+-numSeguSocial: String
+
+}
+
+class CitaMedica {
+-fecha: Date
+-hora: String
+-consultorio: String
+
+}
+class Diagnostico {
+-nombreEnfermedad: String
+-sintomas: String
+-descripcion: String
+
+}
+
+class Receta {
+  -fechaInicio: Date
+  -fechaFin: Date
+}
+
+class Medicamento {
+  -nombreComercial: String
+  -nombreGenerico: String
+  -principioActivo: String
+  -dosisAdulto: String
+  -dosisNino: String
+  -contraindicaciones: String
+  -necesitaReceta: boolean
+}
+
+class Laboratorio {
+  -nombre: String
+  -direccion: String
+  -telefono: String
+}
+
+' === CLASES CRUD ===
+
+class MedicoCrud
+class PacienteCrud
+class CitaMedicaCrud
+class DiagnosticoCrud
+class RecetaCrud
+class MedicamentoCrud
+class LaboratorioCrud
+
+' === RELACIONES ===
+
+Principal --> MedicoCrud
+Principal --> PacienteCrud
+Principal --> CitaMedicaCrud
+Principal --> DiagnosticoCrud
+Principal --> RecetaCrud
+Principal --> MedicamentoCrud
+Principal --> LaboratorioCrud
+
+MedicoCrud --> Medico
+PacienteCrud --> Paciente
+CitaMedicaCrud --> CitaMedica
+DiagnosticoCrud --> Diagnostico
+RecetaCrud --> Receta
+MedicamentoCrud --> Medicamento
+LaboratorioCrud --> Laboratorio
+
+
+@enduml
