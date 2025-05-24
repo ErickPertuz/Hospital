@@ -13,6 +13,14 @@ public class Receta {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private List<MedicamentoPrescrito> medicamentos;
+    private Paciente paciente; 
+
+    public Receta(LocalDate fechaInicio, LocalDate fechaFin, Paciente paciente) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.paciente = paciente;
+        this.medicamentos = new ArrayList<>();
+    }
 
     public Receta(LocalDate fechaInicio, LocalDate fechaFin) {
         this.fechaInicio = fechaInicio;
@@ -46,5 +54,13 @@ public class Receta {
 
     public void setMedicamentos(List<MedicamentoPrescrito> medicamentos) {
         this.medicamentos = medicamentos;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 }
