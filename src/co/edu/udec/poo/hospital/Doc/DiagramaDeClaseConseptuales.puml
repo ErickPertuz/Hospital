@@ -1,0 +1,124 @@
+@startuml
+
+
+package "Hospital" {
+
+class Medico {
+  - nombre: String
+  - direccion: String
+  - telefono: String
+  - poblacion: String
+  - provincia: String
+  - codigoPostal: String
+  - NIF: String
+  - numSeguSocial: String
+  - numColegiado: String
+  - categoria: String
+  - horarioConsulta: Map<String, String>
+  - sustituciones: List<Sustitucion>
+  - vacaciones: List<Vacacion>
+}
+
+class Sustitucion {
+  - fechaAlta: LocalDate
+  - fechaBaja: LocalDate
+}
+
+class Vacacion {
+  - desde: LocalDate
+  - hasta: LocalDate
+}
+
+class Empleado {
+  - nombre: String
+  - direccion: String
+  - telefono: String
+  - poblacion: String
+  - provincia: String
+  - codigoPostal: String
+  - NIF: String
+  - numSeguSocial: String
+  - tipoEmpleado: String
+  - vacaciones: List<Vacacion>
+}
+
+class Paciente {
+  - nombre: String
+  - direccion: String
+  - telefono: String
+  - codigoPostal: String
+  - NIF: String
+  - numSeguSocial: String
+  - medicoAsignado: Medico
+}
+
+class CitaMedica {
+  - fecha: LocalDate
+  - hora: LocalTime
+  - consultorio: String
+  - EPS: String
+  - IPS: String
+  - medico: Medico
+  - paciente: Paciente
+  - diagnostico: Diagnostico
+}
+
+class Diagnostico {
+  - nombreEnfermedad: String
+  - descripcion: String
+  - sintomas: List<Sintoma>
+  - receta: Receta
+}
+
+class Sintoma {
+  - descripcion: String
+}
+
+class Receta {
+  - fechaInicio: LocalDate
+  - fechaFin: LocalDate
+  - medicamentos: List<MedicamentoPrescrito>
+}
+
+class MedicamentoPrescrito {
+  - medicamento: Medicamento
+  - cantidad: int
+  - dosis: String
+}
+
+class Medicamento {
+  - nombreComercial: String
+  - nombreGenerico: String
+  - principioActivo: String
+  - marca: String
+  - presentacion: String
+  - esGenerico: Boolean
+  - unidad: String
+  - dosisAdulto: String
+  - dosisNino: String
+  - contraindicaciones: String
+  - requiereReceta: Boolean
+  - cubiertoPorPOS: Boolean
+  - unidadesDisponibles: int
+  - laboratorio: Laboratorio
+}
+
+class Laboratorio {
+  - nombre: String
+  - direccion: String
+  - telefono: String
+}
+
+Medico "1" -- "*" Paciente : asignado a >
+Medico "1" -- "*" CitaMedica : gestiona >
+Paciente "1" -- "*" CitaMedica : asiste a >
+CitaMedica "1" -- "1" Diagnostico : produce >
+Diagnostico "1" -- "*" Sintoma : presenta >
+Diagnostico "1" -- "1" Receta : prescribe >
+Receta "*" -- "*" MedicamentoPrescrito : contiene >
+MedicamentoPrescrito "*" -- "1" Medicamento : corresponde a >
+Medicamento "*" -- "1" Laboratorio : fabricado por >
+
+}
+
+@enduml
